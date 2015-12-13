@@ -17,7 +17,9 @@
 		805374921C14548F0050763C /* VertexUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805374911C14548F0050763C /* VertexUITests.swift */; };
 		80EFB1991C1D81370084E49A /* preference.plist in Resources */ = {isa = PBXBuildFile; fileRef = 80EFB1981C1D81370084E49A /* preference.plist */; };
 		80EFB19B1C1D818F0084E49A /* Preference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80EFB19A1C1D818F0084E49A /* Preference.swift */; };
-		80EFB19D1C1D8FE90084E49A /* VertexKeyChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80EFB19C1C1D8FE90084E49A /* VertexKeyChain.swift */; };
+		80EFB1A21C1D9BE90084E49A /* VertexRequestType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80EFB1A11C1D9BE90084E49A /* VertexRequestType.swift */; };
+		80EFB1A41C1D9C830084E49A /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80EFB1A31C1D9C830084E49A /* Task.swift */; };
+		80EFB1A61C1DA1630084E49A /* VertexUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80EFB1A51C1DA1630084E49A /* VertexUser.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,7 +57,9 @@
 		805374931C14548F0050763C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		80EFB1981C1D81370084E49A /* preference.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = preference.plist; sourceTree = "<group>"; };
 		80EFB19A1C1D818F0084E49A /* Preference.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preference.swift; sourceTree = "<group>"; };
-		80EFB19C1C1D8FE90084E49A /* VertexKeyChain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VertexKeyChain.swift; sourceTree = "<group>"; };
+		80EFB1A11C1D9BE90084E49A /* VertexRequestType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VertexRequestType.swift; path = API/VertexRequestType.swift; sourceTree = "<group>"; };
+		80EFB1A31C1D9C830084E49A /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Task.swift; path = API/Task.swift; sourceTree = "<group>"; };
+		80EFB1A51C1DA1630084E49A /* VertexUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VertexUser.swift; path = API/VertexUser.swift; sourceTree = "<group>"; };
 		D0E7759940DD393AA6EF3E6D /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -127,6 +131,7 @@
 		805374701C14548F0050763C /* Vertex */ = {
 			isa = PBXGroup;
 			children = (
+				80EFB19E1C1D9AE00084E49A /* API */,
 				805374711C14548F0050763C /* AppDelegate.swift */,
 				805374781C14548F0050763C /* Assets.xcassets */,
 				8053747A1C14548F0050763C /* LaunchScreen.storyboard */,
@@ -135,7 +140,6 @@
 				800953121C17050600AF46CA /* LoginViewController.swift */,
 				80EFB1981C1D81370084E49A /* preference.plist */,
 				80EFB19A1C1D818F0084E49A /* Preference.swift */,
-				80EFB19C1C1D8FE90084E49A /* VertexKeyChain.swift */,
 			);
 			path = Vertex;
 			sourceTree = "<group>";
@@ -156,6 +160,16 @@
 				805374931C14548F0050763C /* Info.plist */,
 			);
 			path = VertexUITests;
+			sourceTree = "<group>";
+		};
+		80EFB19E1C1D9AE00084E49A /* API */ = {
+			isa = PBXGroup;
+			children = (
+				80EFB1A11C1D9BE90084E49A /* VertexRequestType.swift */,
+				80EFB1A31C1D9C830084E49A /* Task.swift */,
+				80EFB1A51C1DA1630084E49A /* VertexUser.swift */,
+			);
+			name = API;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -340,11 +354,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				80EFB1A61C1DA1630084E49A /* VertexUser.swift in Sources */,
 				800953131C17050600AF46CA /* LoginViewController.swift in Sources */,
-				80EFB19D1C1D8FE90084E49A /* VertexKeyChain.swift in Sources */,
 				805374721C14548F0050763C /* AppDelegate.swift in Sources */,
 				80EFB19B1C1D818F0084E49A /* Preference.swift in Sources */,
 				800953111C1703C600AF46CA /* TasksViewController.swift in Sources */,
+				80EFB1A41C1D9C830084E49A /* Task.swift in Sources */,
+				80EFB1A21C1D9BE90084E49A /* VertexRequestType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -43,8 +43,10 @@ class LoginViewController : UIViewController, UIWebViewDelegate {
         if (request.URL?.absoluteString ?? "") == tasksURL!.absoluteString {
             let tokenURL = NSURL(string: "/token/index", relativeToURL: rootURL)
             let doc = Ji(htmlURL: tokenURL!)
-            if let apikey = doc?.xPath("//p")?.first?.value {
-                VertexKeyChain().apikey = apikey
+            if let nickname = doc?.xPath("//span[@id='nickname']")?.first?.value, apikey = doc?.xPath("//span[@id='token']")?.first?.value {
+                let user = VertexUser()
+                user.nickname = nickname
+                user.apikey = apikey
                 dismissViewControllerAnimated(true, completion: nil)
             }
             return false

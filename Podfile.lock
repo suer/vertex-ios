@@ -1,19 +1,25 @@
 PODS:
+  - APIKit (1.1.0):
+    - Result (~> 1.0.1)
   - Ji (1.2.0):
     - Ji/Ji (= 1.2.0)
   - Ji/Ji (1.2.0):
     - Ji/Ji-libxml
   - Ji/Ji-libxml (1.2.0)
+  - Result (1.0.1)
   - SSKeychain (1.2.3)
   - SwiftyJSON (2.3.1)
 
 DEPENDENCIES:
+  - APIKit
   - Ji (~> 1.2.0)
   - SSKeychain
   - SwiftyJSON
 
 SPEC CHECKSUMS:
+  APIKit: c6fd530c361544b713a6b6a8e4902e1e64e93124
   Ji: ddebb22f9ac445db6e884b66f78ea74fb135fdb7
+  Result: caef80340451e1f07492fa1e89117f83613bce24
   SSKeychain: 3f42991739c6c60a9cf1bbd4dff6c0d3694bcf3d
   SwiftyJSON: 592b53bee5ef3dd9b3bebc6b9cb7ee35426ae8c3
 

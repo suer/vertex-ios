@@ -1,7 +1,9 @@
 import UIKit
+import APIKit
 
 class TasksViewController: UITableViewController {
 
+    private var tasks = [Task]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -10,7 +12,7 @@ class TasksViewController: UITableViewController {
 
     override func viewWillAppear(animated: Bool) {
         if didSignin() {
-            // tasksViewModel.fetchTasks()
+            fetch()
         } else {
             presentLoginViewController()
         }
@@ -28,11 +30,39 @@ class TasksViewController: UITableViewController {
     }
 
     func signoutButtonTapped() {
-        VertexKeyChain().apikey = ""
+        VertexUser().apikey = ""
         presentLoginViewController()
     }
 
+    private func fetch() {
+        let request = GetTasksRequest()
+        Session.sendRequest(request) { result in
+            switch result {
+            case .Success(let tasks):
+                self.tasks = tasks
+                self.tableView.reloadData()
+            case .Failure(let error):
+                print(error)
+            }
+        }
+    }
+
     private func didSignin() -> Bool {
-        return !VertexKeyChain().apikey.isEmpty
+        return !VertexUser().apikey.isEmpty
+    }
+
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return tasks.count
+    }
+
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let task = tasks[indexPath.row]
+        let cell = UITableViewCell(style: .Value1, reuseIdentifier: "Cell")
+        cell.textLabel?.text = task.title
+        return cell
+    }
+
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
 }
