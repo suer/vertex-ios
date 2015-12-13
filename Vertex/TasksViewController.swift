@@ -2,17 +2,34 @@ import UIKit
 
 class TasksViewController: UITableViewController {
 
+
     override func viewDidLoad() {
-        VertexKeyChain().apikey = "" // TODO: remove this line
         super.viewDidLoad()
+        loadBarButtons()
     }
 
     override func viewWillAppear(animated: Bool) {
-        if !didSignin() {
-            let controller = LoginViewController()
-            controller.modalPresentationStyle = .FullScreen
-            navigationController?.presentViewController(controller, animated: false, completion: nil)
+        if didSignin() {
+            // tasksViewModel.fetchTasks()
+        } else {
+            presentLoginViewController()
         }
+    }
+
+    private func presentLoginViewController() {
+        let controller = LoginViewController()
+        controller.modalPresentationStyle = .FullScreen
+        navigationController?.presentViewController(controller, animated: false, completion: nil)
+    }
+
+    private func loadBarButtons() {
+        let signoutButton = UIBarButtonItem(title: "Sign out", style: .Plain, target: self, action: Selector("signoutButtonTapped"))
+        navigationItem.leftBarButtonItem = signoutButton
+    }
+
+    func signoutButtonTapped() {
+        VertexKeyChain().apikey = ""
+        presentLoginViewController()
     }
 
     private func didSignin() -> Bool {
