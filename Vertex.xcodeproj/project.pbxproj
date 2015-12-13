@@ -17,6 +17,7 @@
 		805374921C14548F0050763C /* VertexUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805374911C14548F0050763C /* VertexUITests.swift */; };
 		80EFB1991C1D81370084E49A /* preference.plist in Resources */ = {isa = PBXBuildFile; fileRef = 80EFB1981C1D81370084E49A /* preference.plist */; };
 		80EFB19B1C1D818F0084E49A /* Preference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80EFB19A1C1D818F0084E49A /* Preference.swift */; };
+		80EFB19D1C1D8FE90084E49A /* VertexKeyChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80EFB19C1C1D8FE90084E49A /* VertexKeyChain.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,7 @@
 		805374931C14548F0050763C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		80EFB1981C1D81370084E49A /* preference.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = preference.plist; sourceTree = "<group>"; };
 		80EFB19A1C1D818F0084E49A /* Preference.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preference.swift; sourceTree = "<group>"; };
+		80EFB19C1C1D8FE90084E49A /* VertexKeyChain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VertexKeyChain.swift; sourceTree = "<group>"; };
 		D0E7759940DD393AA6EF3E6D /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -133,6 +135,7 @@
 				800953121C17050600AF46CA /* LoginViewController.swift */,
 				80EFB1981C1D81370084E49A /* preference.plist */,
 				80EFB19A1C1D818F0084E49A /* Preference.swift */,
+				80EFB19C1C1D8FE90084E49A /* VertexKeyChain.swift */,
 			);
 			path = Vertex;
 			sourceTree = "<group>";
@@ -338,6 +341,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				800953131C17050600AF46CA /* LoginViewController.swift in Sources */,
+				80EFB19D1C1D8FE90084E49A /* VertexKeyChain.swift in Sources */,
 				805374721C14548F0050763C /* AppDelegate.swift in Sources */,
 				80EFB19B1C1D818F0084E49A /* Preference.swift in Sources */,
 				800953111C1703C600AF46CA /* TasksViewController.swift in Sources */,
