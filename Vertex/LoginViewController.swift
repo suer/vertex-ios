@@ -11,8 +11,15 @@ class LoginViewController : UIViewController, UIWebViewDelegate {
         webview.delegate = self
         view.addSubview(webview)
 
+        let rootURL = NSURL(string: Preference().vertexRootURL)!
 
-        let request = NSMutableURLRequest(URL: NSURL(string: "https://cf-vertex.herokuapp.com/")!)
+        let cookieStorage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
+        let cookies = cookieStorage.cookiesForURL(rootURL)!
+        for cookie in cookies {
+            cookieStorage.deleteCookie(cookie)
+        }
+
+        let request = NSMutableURLRequest(URL: rootURL)
         webview.loadRequest(request)
     }
 }

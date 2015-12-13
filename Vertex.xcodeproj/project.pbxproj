@@ -15,6 +15,8 @@
 		8053747C1C14548F0050763C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8053747A1C14548F0050763C /* LaunchScreen.storyboard */; };
 		805374871C14548F0050763C /* VertexTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805374861C14548F0050763C /* VertexTests.swift */; };
 		805374921C14548F0050763C /* VertexUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805374911C14548F0050763C /* VertexUITests.swift */; };
+		80EFB1991C1D81370084E49A /* preference.plist in Resources */ = {isa = PBXBuildFile; fileRef = 80EFB1981C1D81370084E49A /* preference.plist */; };
+		80EFB19B1C1D818F0084E49A /* Preference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80EFB19A1C1D818F0084E49A /* Preference.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +52,8 @@
 		8053748D1C14548F0050763C /* VertexUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VertexUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		805374911C14548F0050763C /* VertexUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VertexUITests.swift; sourceTree = "<group>"; };
 		805374931C14548F0050763C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		80EFB1981C1D81370084E49A /* preference.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = preference.plist; sourceTree = "<group>"; };
+		80EFB19A1C1D818F0084E49A /* Preference.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preference.swift; sourceTree = "<group>"; };
 		D0E7759940DD393AA6EF3E6D /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -127,6 +131,8 @@
 				8053747D1C14548F0050763C /* Info.plist */,
 				800953101C1703C600AF46CA /* TasksViewController.swift */,
 				800953121C17050600AF46CA /* LoginViewController.swift */,
+				80EFB1981C1D81370084E49A /* preference.plist */,
+				80EFB19A1C1D818F0084E49A /* Preference.swift */,
 			);
 			path = Vertex;
 			sourceTree = "<group>";
@@ -257,6 +263,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8053747C1C14548F0050763C /* LaunchScreen.storyboard in Resources */,
+				80EFB1991C1D81370084E49A /* preference.plist in Resources */,
 				805374791C14548F0050763C /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -332,6 +339,7 @@
 			files = (
 				800953131C17050600AF46CA /* LoginViewController.swift in Sources */,
 				805374721C14548F0050763C /* AppDelegate.swift in Sources */,
+				80EFB19B1C1D818F0084E49A /* Preference.swift in Sources */,
 				800953111C1703C600AF46CA /* TasksViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
