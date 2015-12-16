@@ -1,5 +1,6 @@
 import UIKit
 import APIKit
+import SVProgressHUD
 
 class TasksViewController: UITableViewController {
 
@@ -35,13 +36,16 @@ class TasksViewController: UITableViewController {
     }
 
     private func fetch() {
+        SVProgressHUD.showWithStatus("Fetching tasks...", maskType: .Black)
         let request = GetTasksRequest()
         Session.sendRequest(request) { result in
             switch result {
             case .Success(let tasks):
+                SVProgressHUD.showSuccessWithStatus("Success")
                 self.tasks = tasks
                 self.tableView.reloadData()
             case .Failure(let error):
+                SVProgressHUD.showErrorWithStatus("Error")
                 print(error)
             }
         }
