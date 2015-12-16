@@ -40,3 +40,27 @@ struct GetTasksRequest: VertexRequestType {
         return [Task]()
     }
 }
+
+struct UpdateTasksRequest: VertexRequestType {
+    typealias Response = Task
+
+    var task: Task
+
+    var method: HTTPMethod {
+        return .PUT
+    }
+
+    var path: String {
+        return "/tasks/\(task.id).json"
+    }
+
+
+    var parameters: [String: AnyObject] {
+        return ["user_nickname": nickname, "user_token": apikey, "title": task.title, "done": task.done]
+    }
+
+
+    func responseFromObject(object: AnyObject, URLResponse: NSHTTPURLResponse) -> Response? {
+        return Task()
+    }
+}

@@ -15,6 +15,7 @@
 		8053747C1C14548F0050763C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8053747A1C14548F0050763C /* LaunchScreen.storyboard */; };
 		805374871C14548F0050763C /* VertexTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805374861C14548F0050763C /* VertexTests.swift */; };
 		805374921C14548F0050763C /* VertexUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805374911C14548F0050763C /* VertexUITests.swift */; };
+		80AAAA281C2117C1009D08F9 /* TaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AAAA271C2117C1009D08F9 /* TaskCell.swift */; };
 		80EFB1991C1D81370084E49A /* preference.plist in Resources */ = {isa = PBXBuildFile; fileRef = 80EFB1981C1D81370084E49A /* preference.plist */; };
 		80EFB19B1C1D818F0084E49A /* Preference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80EFB19A1C1D818F0084E49A /* Preference.swift */; };
 		80EFB1A21C1D9BE90084E49A /* VertexRequestType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80EFB1A11C1D9BE90084E49A /* VertexRequestType.swift */; };
@@ -55,6 +56,7 @@
 		8053748D1C14548F0050763C /* VertexUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VertexUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		805374911C14548F0050763C /* VertexUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VertexUITests.swift; sourceTree = "<group>"; };
 		805374931C14548F0050763C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		80AAAA271C2117C1009D08F9 /* TaskCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskCell.swift; sourceTree = "<group>"; };
 		80EFB1981C1D81370084E49A /* preference.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = preference.plist; sourceTree = "<group>"; };
 		80EFB19A1C1D818F0084E49A /* Preference.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preference.swift; sourceTree = "<group>"; };
 		80EFB1A11C1D9BE90084E49A /* VertexRequestType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VertexRequestType.swift; path = API/VertexRequestType.swift; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 				800953121C17050600AF46CA /* LoginViewController.swift */,
 				80EFB1981C1D81370084E49A /* preference.plist */,
 				80EFB19A1C1D818F0084E49A /* Preference.swift */,
+				80AAAA271C2117C1009D08F9 /* TaskCell.swift */,
 			);
 			path = Vertex;
 			sourceTree = "<group>";
@@ -358,6 +361,7 @@
 				800953131C17050600AF46CA /* LoginViewController.swift in Sources */,
 				805374721C14548F0050763C /* AppDelegate.swift in Sources */,
 				80EFB19B1C1D818F0084E49A /* Preference.swift in Sources */,
+				80AAAA281C2117C1009D08F9 /* TaskCell.swift in Sources */,
 				800953111C1703C600AF46CA /* TasksViewController.swift in Sources */,
 				80EFB1A41C1D9C830084E49A /* Task.swift in Sources */,
 				80EFB1A21C1D9BE90084E49A /* VertexRequestType.swift in Sources */,

@@ -1,10 +1,12 @@
 import UIKit
 import APIKit
 import SVProgressHUD
+import MCSwipeTableViewCell
 
-class TasksViewController: UITableViewController {
+class TasksViewController: UITableViewController, MCSwipeTableViewCellDelegate {
 
     private var tasks = [Task]()
+    private var cellSwipePercentage = CGFloat(0.0)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,6 +53,27 @@ class TasksViewController: UITableViewController {
         }
     }
 
+    private func toggleTaskDone(taskCell: TaskCell) {
+        let param = Task()
+        param.id = taskCell.task.id
+        param.title = taskCell.task.title
+        param.done = !taskCell.task.done
+
+        SVProgressHUD.showWithStatus("Updating tasks...", maskType: .Black)
+        let request = UpdateTasksRequest(task: param)
+        Session.sendRequest(request) { result in
+            switch result {
+            case .Success(_):
+                self.tasks[taskCell.row] = param
+                self.tableView.reloadData()
+                SVProgressHUD.showSuccessWithStatus("Success")
+            case .Failure(let error):
+                SVProgressHUD.showErrorWithStatus("Error")
+                print(error)
+            }
+        }
+    }
+
     private func didSignin() -> Bool {
         return !VertexUser().apikey.isEmpty
     }
@@ -61,12 +84,47 @@ class TasksViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let task = tasks[indexPath.row]
-        let cell = UITableViewCell(style: .Value1, reuseIdentifier: "Cell")
+        let cell = TaskCell(task: task, row: indexPath.row, style: .Value1, reuseIdentifier: "Cell")
         cell.textLabel?.text = task.title
+        if task.done {
+            cell.textLabel?.text = task.title + " Done"
+        }
+        configureCell(cell, forRowAtIndexPath: indexPath)
         return cell
+    }
+
+
+    func configureCell(cell: MCSwipeTableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        let checkView = self.viewWithImageName("check")
+        let greenColor = UIColor(red: 85.0 / 255.0, green:213.0 / 255.0, blue:80.0 / 255.0, alpha:1.0)
+        cell.delegate = self
+        cell.setSwipeGestureWithView(checkView, color: greenColor, mode: .Switch, state: .State1, completionBlock: nil)
+
+    }
+
+    private func viewWithImageName(imageName: String) -> UIView {
+        let imageView = UIImageView(frame: CGRectMake(0, 0, 44, 44))
+        imageView.contentMode = .Center
+        return imageView
     }
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
+
+    func swipeTableViewCellDidStartSwiping(cell: MCSwipeTableViewCell!) {
+        self.cellSwipePercentage = 0.0
+    }
+
+    func swipeTableViewCellDidEndSwiping(cell: MCSwipeTableViewCell!) {
+        if self.cellSwipePercentage >= cell.firstTrigger {
+            if let taskCell = cell as? TaskCell {
+                toggleTaskDone(taskCell)
+            }
+        }
+    }
+
+    func swipeTableViewCell(cell: MCSwipeTableViewCell!, didSwipeWithPercentage percentage: CGFloat) {
+        self.cellSwipePercentage = percentage
     }
 }
