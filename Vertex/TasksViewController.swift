@@ -85,14 +85,9 @@ class TasksViewController: UITableViewController, MCSwipeTableViewCellDelegate {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let task = tasks[indexPath.row]
         let cell = TaskCell(task: task, row: indexPath.row, style: .Value1, reuseIdentifier: "Cell")
-        cell.textLabel?.text = task.title
-        if task.done {
-            cell.textLabel?.text = task.title + " Done"
-        }
         configureCell(cell, forRowAtIndexPath: indexPath)
         return cell
     }
-
 
     func configureCell(cell: MCSwipeTableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         let checkView = self.viewWithImageName("check")
@@ -103,7 +98,7 @@ class TasksViewController: UITableViewController, MCSwipeTableViewCellDelegate {
     }
 
     private func viewWithImageName(imageName: String) -> UIView {
-        let imageView = UIImageView(frame: CGRectMake(0, 0, 44, 44))
+        let imageView = UIImageView(image: UIImage(named: "check"))
         imageView.contentMode = .Center
         return imageView
     }

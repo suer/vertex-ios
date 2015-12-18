@@ -16,6 +16,8 @@
 		805374871C14548F0050763C /* VertexTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805374861C14548F0050763C /* VertexTests.swift */; };
 		805374921C14548F0050763C /* VertexUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805374911C14548F0050763C /* VertexUITests.swift */; };
 		80AAAA281C2117C1009D08F9 /* TaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AAAA271C2117C1009D08F9 /* TaskCell.swift */; };
+		80AAAA2E1C21C315009D08F9 /* check.png in Resources */ = {isa = PBXBuildFile; fileRef = 80AAAA2C1C21C315009D08F9 /* check.png */; };
+		80AAAA2F1C21C315009D08F9 /* check@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 80AAAA2D1C21C315009D08F9 /* check@2x.png */; };
 		80EFB1991C1D81370084E49A /* preference.plist in Resources */ = {isa = PBXBuildFile; fileRef = 80EFB1981C1D81370084E49A /* preference.plist */; };
 		80EFB19B1C1D818F0084E49A /* Preference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80EFB19A1C1D818F0084E49A /* Preference.swift */; };
 		80EFB1A21C1D9BE90084E49A /* VertexRequestType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80EFB1A11C1D9BE90084E49A /* VertexRequestType.swift */; };
@@ -57,6 +59,8 @@
 		805374911C14548F0050763C /* VertexUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VertexUITests.swift; sourceTree = "<group>"; };
 		805374931C14548F0050763C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		80AAAA271C2117C1009D08F9 /* TaskCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskCell.swift; sourceTree = "<group>"; };
+		80AAAA2C1C21C315009D08F9 /* check.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = check.png; path = Icons/check.png; sourceTree = "<group>"; };
+		80AAAA2D1C21C315009D08F9 /* check@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "check@2x.png"; path = "Icons/check@2x.png"; sourceTree = "<group>"; };
 		80EFB1981C1D81370084E49A /* preference.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = preference.plist; sourceTree = "<group>"; };
 		80EFB19A1C1D818F0084E49A /* Preference.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preference.swift; sourceTree = "<group>"; };
 		80EFB1A11C1D9BE90084E49A /* VertexRequestType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VertexRequestType.swift; path = API/VertexRequestType.swift; sourceTree = "<group>"; };
@@ -133,6 +137,7 @@
 		805374701C14548F0050763C /* Vertex */ = {
 			isa = PBXGroup;
 			children = (
+				80AAAA291C21C289009D08F9 /* Icons */,
 				80EFB19E1C1D9AE00084E49A /* API */,
 				805374711C14548F0050763C /* AppDelegate.swift */,
 				805374781C14548F0050763C /* Assets.xcassets */,
@@ -163,6 +168,15 @@
 				805374931C14548F0050763C /* Info.plist */,
 			);
 			path = VertexUITests;
+			sourceTree = "<group>";
+		};
+		80AAAA291C21C289009D08F9 /* Icons */ = {
+			isa = PBXGroup;
+			children = (
+				80AAAA2C1C21C315009D08F9 /* check.png */,
+				80AAAA2D1C21C315009D08F9 /* check@2x.png */,
+			);
+			name = Icons;
 			sourceTree = "<group>";
 		};
 		80EFB19E1C1D9AE00084E49A /* API */ = {
@@ -282,8 +296,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				80AAAA2F1C21C315009D08F9 /* check@2x.png in Resources */,
 				8053747C1C14548F0050763C /* LaunchScreen.storyboard in Resources */,
 				80EFB1991C1D81370084E49A /* preference.plist in Resources */,
+				80AAAA2E1C21C315009D08F9 /* check.png in Resources */,
 				805374791C14548F0050763C /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
