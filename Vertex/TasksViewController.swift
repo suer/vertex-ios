@@ -89,17 +89,20 @@ class TasksViewController: UITableViewController, MCSwipeTableViewCellDelegate {
         return cell
     }
 
-    func configureCell(cell: MCSwipeTableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        let checkView = self.viewWithImageName("check")
-        let greenColor = UIColor(red: 85.0 / 255.0, green:213.0 / 255.0, blue:80.0 / 255.0, alpha:1.0)
+    func configureCell(cell: TaskCell, forRowAtIndexPath indexPath: NSIndexPath) {
         cell.delegate = self
-        cell.setSwipeGestureWithView(checkView, color: greenColor, mode: .Switch, state: .State1, completionBlock: nil)
-
+        if cell.task.done {
+            let redColor = UIColor(red:232.0 / 255.0, green:61.0 / 255.0,blue: 14.0 / 255.0, alpha:1.0)
+            cell.setSwipeGestureWithView(self.viewWithImageName("times"), color: redColor, mode: .Switch, state: .State1, completionBlock: nil)
+        } else {
+            let greenColor = UIColor(red:85.0 / 255.0, green:213.0 / 255.0, blue:80.0 / 255.0, alpha:1.0)
+            cell.setSwipeGestureWithView(self.viewWithImageName("check"), color: greenColor, mode: .Switch, state: .State1, completionBlock: nil)
+        }
     }
 
     private func viewWithImageName(imageName: String) -> UIView {
-        let imageView = UIImageView(image: UIImage(named: "check"))
-        imageView.contentMode = .Center
+        let imageView = UIImageView(image: UIImage(named: imageName))
+        imageView.contentMode = .Left
         return imageView
     }
 
