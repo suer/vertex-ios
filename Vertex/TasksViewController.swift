@@ -33,8 +33,20 @@ class TasksViewController: UITableViewController, MCSwipeTableViewCellDelegate {
     }
 
     func signoutButtonTapped() {
-        VertexUser().apikey = ""
-        presentLoginViewController()
+        let alert = UIAlertController(title: "Are you sure to signout from Vetex?", message: "", preferredStyle: .ActionSheet)
+
+        let signoutAction = UIAlertAction(title: "Signout", style: .Default) {
+            action in
+            VertexUser().apikey = ""
+            self.presentLoginViewController()
+        }
+        alert.addAction(signoutAction)
+
+        let cancelAction = UIAlertAction(title: "Cancel",
+            style: .Cancel) { action in return }
+        alert.addAction(cancelAction)
+
+        presentViewController(alert, animated: true, completion: nil)
     }
 
     private func fetch() {
