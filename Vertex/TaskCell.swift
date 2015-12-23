@@ -22,8 +22,10 @@ class TaskCell: MCSwipeTableViewCell {
         task.done = done
         if done {
             self.accessoryType = .Checkmark
+            self.backgroundColor = UIColor(white: 242.0 / 255.0, alpha: 1.0)
         } else {
             self.accessoryType = .None
+            self.backgroundColor = UIColor.whiteColor()
         }
     }
 }

@@ -83,16 +83,15 @@ class TasksViewController: UITableViewController, MCSwipeTableViewCellDelegate {
         param.title = taskCell.task.title
         param.done = !taskCell.task.done
 
-        SVProgressHUD.showWithStatus("Updating tasks...", maskType: .Black)
+        taskCell.setDone(!taskCell.task.done)
+
         let request = UpdateTasksRequest(task: param)
         Session.sendRequest(request) { result in
             switch result {
             case .Success(_):
                 self.tasks[taskCell.row] = param
-                self.tableView.reloadData()
-                SVProgressHUD.showSuccessWithStatus("Success")
             case .Failure(let error):
-                SVProgressHUD.showErrorWithStatus("Error")
+                taskCell.setDone(!taskCell.task.done)
                 print(error)
             }
         }
