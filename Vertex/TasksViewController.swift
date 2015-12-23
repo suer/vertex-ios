@@ -10,6 +10,7 @@ class TasksViewController: UITableViewController, MCSwipeTableViewCellDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "Vertex"
         loadBarButtons()
     }
 
