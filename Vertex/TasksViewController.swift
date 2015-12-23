@@ -118,6 +118,7 @@ class TasksViewController: UITableViewController, MCSwipeTableViewCellDelegate {
         if cell.task.done {
             let redColor = UIColor(red:232.0 / 255.0, green:61.0 / 255.0,blue: 14.0 / 255.0, alpha:1.0)
             cell.setSwipeGestureWithView(self.viewWithImageName("times"), color: redColor, mode: .Switch, state: .State1, completionBlock: nil)
+            cell.backgroundColor = UIColor(white: 242.0 / 255.0, alpha: 1.0)
         } else {
             let greenColor = UIColor(red:85.0 / 255.0, green:213.0 / 255.0, blue:80.0 / 255.0, alpha:1.0)
             cell.setSwipeGestureWithView(self.viewWithImageName("check"), color: greenColor, mode: .Switch, state: .State1, completionBlock: nil)
