@@ -2,6 +2,7 @@ import UIKit
 import APIKit
 import SVProgressHUD
 import MCSwipeTableViewCell
+import PullToRefreshSwift
 
 class TasksViewController: UITableViewController, MCSwipeTableViewCellDelegate {
 
@@ -12,6 +13,7 @@ class TasksViewController: UITableViewController, MCSwipeTableViewCellDelegate {
         super.viewDidLoad()
         self.title = "Vertex"
         loadBarButtons()
+        addPullToRefresh()
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -26,6 +28,15 @@ class TasksViewController: UITableViewController, MCSwipeTableViewCellDelegate {
         let controller = LoginViewController()
         controller.modalPresentationStyle = .FullScreen
         navigationController?.presentViewController(controller, animated: false, completion: nil)
+    }
+    
+    private func addPullToRefresh() {
+        let options = PullToRefreshOption()
+        options.backgroundColor = UIColor.whiteColor()
+        options.indicatorColor = UIColor.whiteColor()
+        self.tableView.addPullToRefresh(options: options) { [weak self] in
+            self?.fetch()
+        }
     }
 
     private func loadBarButtons() {
