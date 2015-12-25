@@ -3,6 +3,7 @@ import APIKit
 import SVProgressHUD
 import MCSwipeTableViewCell
 import PullToRefreshSwift
+import AudioToolbox
 
 class TasksViewController: UITableViewController, MCSwipeTableViewCellDelegate {
 
@@ -85,6 +86,8 @@ class TasksViewController: UITableViewController, MCSwipeTableViewCellDelegate {
 
         taskCell.setDone(!taskCell.task.done)
 
+        AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
+        
         let request = UpdateTasksRequest(task: param)
         Session.sendRequest(request) { result in
             switch result {
