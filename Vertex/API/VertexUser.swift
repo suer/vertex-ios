@@ -1,4 +1,4 @@
-import SSKeychain
+import KeychainAccess
 
 class VertexUser {
     private let KEY_OF_NICKNAME = "VERTEX_NICKNAME"
@@ -19,10 +19,10 @@ class VertexUser {
 
     var apikey: String {
         get {
-            return SSKeychain.passwordForService(KEYCHAIN_SERVICE_NAME, account: KEYCHAIN_USERNAME) ?? ""
+            return Keychain(service: KEYCHAIN_SERVICE_NAME)[KEYCHAIN_USERNAME] ?? ""
         }
         set {
-            SSKeychain.setPassword(newValue, forService: KEYCHAIN_SERVICE_NAME, account: KEYCHAIN_USERNAME)
+            Keychain(service: KEYCHAIN_SERVICE_NAME)[KEYCHAIN_USERNAME] = newValue
         }
     }
 }
