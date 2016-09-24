@@ -2,14 +2,14 @@ import UIKit
 import Ji
 
 class LoginViewController : UIViewController, UIWebViewDelegate {
-    private let webview = UIWebView(frame: CGRectZero)
-    private let rootURL = NSURL(string: Preference().vertexRootURL)!
-    private var signedIn = false
+    fileprivate let webview = UIWebView(frame: CGRect.zero)
+    fileprivate let rootURL = URL(string: Preference().vertexRootURL)!
+    fileprivate var signedIn = false
 
     override func viewDidLoad() {
         title = "Sign in"
 
-        webview.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+        webview.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         webview.frame = view.bounds
         webview.delegate = self
         view.addSubview(webview)
@@ -17,37 +17,37 @@ class LoginViewController : UIViewController, UIWebViewDelegate {
 
         removeCookie(rootURL)
 
-        let request = NSMutableURLRequest(URL: rootURL)
-        webview.loadRequest(request)
+        let request = NSMutableURLRequest(url: rootURL)
+        webview.loadRequest(request as URLRequest)
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.signedIn = false
     }
 
-    private func removeCookie(url: NSURL) {
-        let cookieStorage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
-        let cookies = cookieStorage.cookiesForURL(url)!
+    fileprivate func removeCookie(_ url: URL) {
+        let cookieStorage = HTTPCookieStorage.shared
+        let cookies = cookieStorage.cookies(for: url)!
         for cookie in cookies {
             cookieStorage.deleteCookie(cookie)
         }
     }
 
-    func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+    func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
         if signedIn {
             return true
         }
 
-        let tasksURL = NSURL(string: "/tasks", relativeToURL: rootURL)
-        if (request.URL?.absoluteString ?? "") == tasksURL!.absoluteString {
-            let tokenURL = NSURL(string: "/token/index", relativeToURL: rootURL)
+        let tasksURL = URL(string: "/tasks", relativeTo: rootURL)
+        if (request.url?.absoluteString ?? "") == tasksURL!.absoluteString {
+            let tokenURL = URL(string: "/token/index", relativeTo: rootURL)
             let doc = Ji(htmlURL: tokenURL!)
-            if let nickname = doc?.xPath("//span[@id='nickname']")?.first?.value, apikey = doc?.xPath("//span[@id='token']")?.first?.value {
+            if let nickname = doc?.xPath("//span[@id='nickname']")?.first?.value, let apikey = doc?.xPath("//span[@id='token']")?.first?.value {
                 let user = VertexUser()
                 user.nickname = nickname
                 user.apikey = apikey
-                dismissViewControllerAnimated(true, completion: nil)
+                dismiss(animated: true, completion: nil)
             }
             return false
         }

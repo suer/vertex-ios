@@ -5,10 +5,10 @@ class Preference {
 
     var vertexRootURL : String {
         get {
-            let bundle = NSBundle.mainBundle()
-            let path = bundle.pathForResource("preference", ofType: "plist")
+            let bundle = Bundle.main
+            let path = bundle.path(forResource: "preference", ofType: "plist")
             let dictionary = NSDictionary(contentsOfFile: path!)
-            return dictionary!.objectForKey(KEY_OF_VERTEX_ROOT_URL) as! String
+            return dictionary!.object(forKey: KEY_OF_VERTEX_ROOT_URL) as! String
         }
     }
 }

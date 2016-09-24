@@ -1,11 +1,11 @@
 import APIKit
 
-protocol VertexRequestType: RequestType {
+protocol VertexRequestType: Request {
 }
 
 extension VertexRequestType {
-    var baseURL: NSURL {
-        return NSURL(string: Preference().vertexRootURL)!
+    var baseURL: URL {
+        return NSURL(string: Preference().vertexRootURL)! as URL
     }
 
     var nickname: String {
@@ -22,18 +22,18 @@ struct GetTasksRequest: VertexRequestType {
     typealias Response = [Task]
 
     var method: HTTPMethod {
-        return .GET
+        return .get
     }
 
     var path: String {
         return "/tasks.json"
     }
 
-    var parameters: [String: AnyObject] {
+    var parameters: Any? {
         return ["user_nickname": nickname, "user_token": apikey]
     }
 
-    func responseFromObject(object: AnyObject, URLResponse: NSHTTPURLResponse) -> Response? {
+    func response(from object: Any, urlResponse: HTTPURLResponse) throws -> Response {
         if let dictionaries = object as? [[String: AnyObject]] {
             return dictionaries.map {dictionary in Task(dictionary: dictionary)}
         }
@@ -47,7 +47,7 @@ struct UpdateTasksRequest: VertexRequestType {
     var task: Task
 
     var method: HTTPMethod {
-        return .PUT
+        return .put
     }
 
     var path: String {
@@ -55,12 +55,12 @@ struct UpdateTasksRequest: VertexRequestType {
     }
 
 
-    var parameters: [String: AnyObject] {
+    var parameters: Any? {
         return ["user_nickname": nickname, "user_token": apikey, "title": task.title, "done": task.done]
     }
 
 
-    func responseFromObject(object: AnyObject, URLResponse: NSHTTPURLResponse) -> Response? {
+    func response(from object: Any, urlResponse: HTTPURLResponse) throws -> Response {
         return Task()
     }
 }

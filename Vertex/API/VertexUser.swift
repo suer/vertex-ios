@@ -1,19 +1,19 @@
 import KeychainAccess
 
 class VertexUser {
-    private let KEY_OF_NICKNAME = "VERTEX_NICKNAME"
+    fileprivate let KEY_OF_NICKNAME = "VERTEX_NICKNAME"
 
-    private let KEYCHAIN_SERVICE_NAME = "Vertex_KeychainService"
-    private let KEYCHAIN_USERNAME = "vertex"
+    fileprivate let KEYCHAIN_SERVICE_NAME = "Vertex_KeychainService"
+    fileprivate let KEYCHAIN_USERNAME = "vertex"
 
     var nickname: String {
         get {
-            let userDefaults = NSUserDefaults.standardUserDefaults()
-            return userDefaults.stringForKey(KEY_OF_NICKNAME) ?? ""
+            let userDefaults = UserDefaults.standard
+            return userDefaults.string(forKey: KEY_OF_NICKNAME) ?? ""
         }
         set {
-            let userDefaults = NSUserDefaults.standardUserDefaults()
-            userDefaults.setObject(newValue, forKey: KEY_OF_NICKNAME)
+            let userDefaults = UserDefaults.standard
+            userDefaults.set(newValue, forKey: KEY_OF_NICKNAME)
         }
     }
 

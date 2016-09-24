@@ -2,22 +2,35 @@ import UIKit
 import APIKit
 import SVProgressHUD
 import MCSwipeTableViewCell
-import PullToRefreshSwift
+import PullToRefresh
 import AudioToolbox
+
+public struct PullToRefreshOption {
+    public var backgroundColor =  UIColor.white
+    public var indicatorColor =  UIColor.white
+    public var autoStopTime: Double = 0
+    public var fixedSectionHeader = false
+}
 
 class TasksViewController: UITableViewController, MCSwipeTableViewCellDelegate {
 
-    private var tasks = [Task]()
-    private var cellSwipePercentage = CGFloat(0.0)
+    fileprivate var tasks = [Task]()
+    fileprivate var cellSwipePercentage = CGFloat(0.0)
+
+    deinit {
+        tableView.removePullToRefresh(tableView.topPullToRefresh!)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Vertex"
+        edgesForExtendedLayout = UIRectEdge()
+        automaticallyAdjustsScrollViewInsets = false
         loadBarButtons()
         addPullToRefresh()
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         if didSignin() {
             fetch()
         } else {
@@ -25,30 +38,29 @@ class TasksViewController: UITableViewController, MCSwipeTableViewCellDelegate {
         }
     }
 
-    private func presentLoginViewController() {
+    fileprivate func presentLoginViewController() {
         let controller = LoginViewController()
-        controller.modalPresentationStyle = .FullScreen
-        navigationController?.presentViewController(controller, animated: false, completion: nil)
+        controller.modalPresentationStyle = .fullScreen
+        navigationController?.present(controller, animated: false, completion: nil)
     }
     
-    private func addPullToRefresh() {
-        let options = PullToRefreshOption()
-        options.backgroundColor = UIColor.whiteColor()
-        options.indicatorColor = UIColor.whiteColor()
-        self.tableView.addPullToRefresh(options: options) { [weak self] in
-            self?.fetch()
+    fileprivate func addPullToRefresh() {
+        let refresher = PullToRefresh()
+        tableView.addPullToRefresh(refresher) {
+            self.fetch()
         }
+
     }
 
-    private func loadBarButtons() {
-        let signoutButton = UIBarButtonItem(title: "Sign out", style: .Plain, target: self, action: Selector("signoutButtonTapped"))
+    fileprivate func loadBarButtons() {
+        let signoutButton = UIBarButtonItem(title: "Sign out", style: .plain, target: self, action: #selector(TasksViewController.signoutButtonTapped))
         navigationItem.leftBarButtonItem = signoutButton
     }
 
     func signoutButtonTapped() {
-        let alert = UIAlertController(title: "Are you sure to signout from Vetex?", message: "", preferredStyle: .ActionSheet)
+        let alert = UIAlertController(title: "Are you sure to signout from Vetex?", message: "", preferredStyle: .actionSheet)
 
-        let signoutAction = UIAlertAction(title: "Signout", style: .Default) {
+        let signoutAction = UIAlertAction(title: "Signout", style: .default) {
             action in
             VertexUser().apikey = ""
             self.presentLoginViewController()
@@ -56,29 +68,31 @@ class TasksViewController: UITableViewController, MCSwipeTableViewCellDelegate {
         alert.addAction(signoutAction)
 
         let cancelAction = UIAlertAction(title: "Cancel",
-            style: .Cancel) { action in return }
+            style: .cancel) { action in return }
         alert.addAction(cancelAction)
 
-        presentViewController(alert, animated: true, completion: nil)
+        present(alert, animated: true, completion: nil)
     }
 
-    private func fetch() {
-        SVProgressHUD.showWithStatus("Fetching tasks...", maskType: .Black)
+    fileprivate func fetch() {
+        SVProgressHUD.show(withStatus: "Fetching tasks...", maskType: .black)
         let request = GetTasksRequest()
-        Session.sendRequest(request) { result in
+        Session.send(request) { result in
             switch result {
-            case .Success(let tasks):
-                SVProgressHUD.showSuccessWithStatus("Success")
+            case .success(let tasks):
+                SVProgressHUD.showSuccess(withStatus: "Success")
                 self.tasks = tasks
                 self.tableView.reloadData()
-            case .Failure(let error):
-                SVProgressHUD.showErrorWithStatus("Error")
+                self.tableView.endRefreshing(at: .top)
+            case .failure(let error):
+                SVProgressHUD.showError(withStatus: "Error")
+                self.tableView.endRefreshing(at: .top)
                 print(error)
             }
         }
     }
 
-    private func toggleTaskDone(taskCell: TaskCell) {
+    fileprivate func toggleTaskDone(_ taskCell: TaskCell) {
         let param = Task()
         param.id = taskCell.task.id
         param.title = taskCell.task.title
@@ -89,59 +103,59 @@ class TasksViewController: UITableViewController, MCSwipeTableViewCellDelegate {
         AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
         
         let request = UpdateTasksRequest(task: param)
-        Session.sendRequest(request) { result in
+        Session.send(request) { result in
             switch result {
-            case .Success(_):
+            case .success(_):
                 self.tasks[taskCell.row] = param
-            case .Failure(let error):
+            case .failure(let error):
                 taskCell.setDone(!taskCell.task.done)
                 print(error)
             }
         }
     }
 
-    private func didSignin() -> Bool {
+    fileprivate func didSignin() -> Bool {
         return !VertexUser().apikey.isEmpty
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tasks.count
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let task = tasks[indexPath.row]
-        let cell = TaskCell(task: task, row: indexPath.row, style: .Value1, reuseIdentifier: "Cell")
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let task = tasks[(indexPath as NSIndexPath).row]
+        let cell = TaskCell(task: task, row: (indexPath as NSIndexPath).row, style: .value1, reuseIdentifier: "Cell")
         configureCell(cell, forRowAtIndexPath: indexPath)
         return cell
     }
 
-    func configureCell(cell: TaskCell, forRowAtIndexPath indexPath: NSIndexPath) {
+    func configureCell(_ cell: TaskCell, forRowAtIndexPath indexPath: IndexPath) {
         cell.delegate = self
         if cell.task.done {
             let redColor = UIColor(red:232.0 / 255.0, green:61.0 / 255.0,blue: 14.0 / 255.0, alpha:1.0)
-            cell.setSwipeGestureWithView(self.viewWithImageName("times"), color: redColor, mode: .Switch, state: .State1, completionBlock: nil)
+            cell.setSwipeGestureWith(self.viewWithImageName("times"), color: redColor, mode: .switch, state: .state1, completionBlock: nil)
             cell.backgroundColor = UIColor(white: 242.0 / 255.0, alpha: 1.0)
         } else {
             let greenColor = UIColor(red:85.0 / 255.0, green:213.0 / 255.0, blue:80.0 / 255.0, alpha:1.0)
-            cell.setSwipeGestureWithView(self.viewWithImageName("check"), color: greenColor, mode: .Switch, state: .State1, completionBlock: nil)
+            cell.setSwipeGestureWith(self.viewWithImageName("check"), color: greenColor, mode: .switch, state: .state1, completionBlock: nil)
         }
     }
 
-    private func viewWithImageName(imageName: String) -> UIView {
+    fileprivate func viewWithImageName(_ imageName: String) -> UIView {
         let imageView = UIImageView(image: UIImage(named: imageName))
-        imageView.contentMode = .Left
+        imageView.contentMode = .left
         return imageView
     }
 
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 
-    func swipeTableViewCellDidStartSwiping(cell: MCSwipeTableViewCell!) {
+    func swipeTableViewCellDidStartSwiping(_ cell: MCSwipeTableViewCell!) {
         self.cellSwipePercentage = 0.0
     }
 
-    func swipeTableViewCellDidEndSwiping(cell: MCSwipeTableViewCell!) {
+    func swipeTableViewCellDidEndSwiping(_ cell: MCSwipeTableViewCell!) {
         if self.cellSwipePercentage >= cell.firstTrigger {
             if let taskCell = cell as? TaskCell {
                 toggleTaskDone(taskCell)
@@ -149,7 +163,7 @@ class TasksViewController: UITableViewController, MCSwipeTableViewCellDelegate {
         }
     }
 
-    func swipeTableViewCell(cell: MCSwipeTableViewCell!, didSwipeWithPercentage percentage: CGFloat) {
+    func swipeTableViewCell(_ cell: MCSwipeTableViewCell!, didSwipeWithPercentage percentage: CGFloat) {
         self.cellSwipePercentage = percentage
     }
 }

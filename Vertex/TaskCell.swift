@@ -18,14 +18,14 @@ class TaskCell: MCSwipeTableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func setDone(done: Bool) {
+    func setDone(_ done: Bool) {
         task.done = done
         if done {
-            self.accessoryType = .Checkmark
+            self.accessoryType = .checkmark
             self.backgroundColor = UIColor(white: 242.0 / 255.0, alpha: 1.0)
         } else {
-            self.accessoryType = .None
-            self.backgroundColor = UIColor.whiteColor()
+            self.accessoryType = .none
+            self.backgroundColor = UIColor.white
         }
     }
 }
