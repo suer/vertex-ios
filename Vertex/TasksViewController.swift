@@ -57,7 +57,7 @@ class TasksViewController: UITableViewController, MCSwipeTableViewCellDelegate {
         navigationItem.leftBarButtonItem = signoutButton
     }
 
-    func signoutButtonTapped() {
+    @objc func signoutButtonTapped() {
         let alert = UIAlertController(title: "Are you sure to signout from Vetex?", message: "", preferredStyle: .actionSheet)
 
         let signoutAction = UIAlertAction(title: "Signout", style: .default) {

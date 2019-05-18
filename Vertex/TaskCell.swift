@@ -4,7 +4,7 @@ import MCSwipeTableViewCell
 class TaskCell: MCSwipeTableViewCell {
     let task: Task
     let row: Int
-    init(task: Task, row: Int, style: UITableViewCellStyle, reuseIdentifier: String?) {
+    init(task: Task, row: Int, style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         self.task = task
         self.row = row
         

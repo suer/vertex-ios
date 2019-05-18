@@ -22,6 +22,17 @@ DEPENDENCIES:
   - SVProgressHUD
   - SwiftyJSON (~> 3.0.0)
 
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - APIKit
+    - Ji
+    - KeychainAccess
+    - MCSwipeTableViewCell
+    - PullToRefresher
+    - Result
+    - SVProgressHUD
+    - SwiftyJSON
+
 SPEC CHECKSUMS:
   APIKit: 7e9257f0220861ada9ffce0549ad3a0338dbbafa
   Ji: 79e11b5256ee809f9f7e51dc7de2059e35adf7a6
@@ -34,4 +45,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 32012a81d8008aca001c4b5dfc1914b9dcb46d3f
 
-COCOAPODS: 1.1.0.rc.2
+COCOAPODS: 1.6.2
