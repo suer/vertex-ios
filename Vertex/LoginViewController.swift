@@ -1,5 +1,5 @@
 import UIKit
-import Ji
+import Kanna
 
 class LoginViewController : UIViewController, UIWebViewDelegate {
     fileprivate let webview = UIWebView(frame: CGRect.zero)
@@ -42,12 +42,13 @@ class LoginViewController : UIViewController, UIWebViewDelegate {
         let tasksURL = URL(string: "/tasks", relativeTo: rootURL)
         if (request.url?.absoluteString ?? "") == tasksURL!.absoluteString {
             let tokenURL = URL(string: "/token/index", relativeTo: rootURL)
-            let doc = Ji(htmlURL: tokenURL!)
-            if let nickname = doc?.xPath("//span[@id='nickname']")?.first?.value, let apikey = doc?.xPath("//span[@id='token']")?.first?.value {
-                let user = VertexUser()
-                user.nickname = nickname
-                user.apikey = apikey
-                dismiss(animated: true, completion: nil)
+            if let doc = try? HTML(url: tokenURL!, encoding: String.Encoding.utf8) {
+                if let nickname = doc.xpath("//span[@id='nickname']").first, let apikey = doc.xpath("//span[@id='token']").first {
+                    let user = VertexUser()
+                    user.nickname = nickname.text ?? ""
+                    user.apikey = apikey.text ?? ""
+                    dismiss(animated: true, completion: nil)
+                }
             }
             return false
         }

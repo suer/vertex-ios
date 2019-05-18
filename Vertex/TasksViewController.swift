@@ -18,7 +18,7 @@ class TasksViewController: UITableViewController, MCSwipeTableViewCellDelegate {
     fileprivate var cellSwipePercentage = CGFloat(0.0)
 
     deinit {
-        tableView.removePullToRefresh(tableView.topPullToRefresh!)
+        tableView.removePullToRefresh(at: Position.top)
     }
 
     override func viewDidLoad() {
@@ -75,7 +75,7 @@ class TasksViewController: UITableViewController, MCSwipeTableViewCellDelegate {
     }
 
     fileprivate func fetch() {
-        SVProgressHUD.show(withStatus: "Fetching tasks...", maskType: .black)
+        SVProgressHUD.show(withStatus: "Fetching tasks...")
         let request = GetTasksRequest()
         Session.send(request) { result in
             switch result {

@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import Vertex
+@testable import Pods_Vertex
 
 class VertexTests: XCTestCase {
     
