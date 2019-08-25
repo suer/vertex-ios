@@ -3,7 +3,6 @@ PODS:
   - Kanna (5.0.0)
   - KeychainAccess (3.2.0)
   - MCSwipeTableViewCell (2.1.4)
-  - PullToRefresher (3.1)
   - SVProgressHUD (2.2.5)
   - SwiftyJSON (5.0.0)
 
@@ -12,7 +11,6 @@ DEPENDENCIES:
   - Kanna (~> 5.0.0)
   - KeychainAccess (~> 3.2.0)
   - MCSwipeTableViewCell
-  - PullToRefresher (~> 3.1)
   - SVProgressHUD
   - SwiftyJSON (~> 5.0.0)
 
@@ -22,7 +20,6 @@ SPEC REPOS:
     - Kanna
     - KeychainAccess
     - MCSwipeTableViewCell
-    - PullToRefresher
     - SVProgressHUD
     - SwiftyJSON
 
@@ -31,10 +28,9 @@ SPEC CHECKSUMS:
   Kanna: a32875df62975f8f4b871e933b4ea1a5c3b8be0f
   KeychainAccess: 3b1bf8a77eb4c6ea1ce9404c292e48f948954c6b
   MCSwipeTableViewCell: 1b303e16c3a26b1982f3a68386e9b8c5fc8344c3
-  PullToRefresher: ec8c1942bd61bb512ff520c49f9f00903cfa86c7
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
 
-PODFILE CHECKSUM: 96c45dc61ad294c4e170b7d461af011f29a13dbe
+PODFILE CHECKSUM: 35c7f4ea6e503278fdc1bbc30c3261f39f48b530
 
 COCOAPODS: 1.6.2

@@ -2,7 +2,6 @@ import UIKit
 import APIKit
 import SVProgressHUD
 import MCSwipeTableViewCell
-import PullToRefresh
 import AudioToolbox
 
 public struct PullToRefreshOption {
@@ -17,17 +16,13 @@ class TasksViewController: UITableViewController, MCSwipeTableViewCellDelegate {
     fileprivate var tasks = [Task]()
     fileprivate var cellSwipePercentage = CGFloat(0.0)
 
-    deinit {
-        tableView.removePullToRefresh(at: Position.top)
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Vertex"
         edgesForExtendedLayout = UIRectEdge()
         automaticallyAdjustsScrollViewInsets = false
         loadBarButtons()
-        addPullToRefresh()
+        setupPullToRefresh()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -44,12 +39,9 @@ class TasksViewController: UITableViewController, MCSwipeTableViewCellDelegate {
         navigationController?.present(controller, animated: false, completion: nil)
     }
     
-    fileprivate func addPullToRefresh() {
-        let refresher = PullToRefresh()
-        tableView.addPullToRefresh(refresher) {
-            self.fetch()
-        }
-
+    fileprivate func setupPullToRefresh() {
+        tableView.refreshControl = UIRefreshControl()
+        tableView.refreshControl?.addTarget(self, action: #selector(fetch), for: .valueChanged)
     }
 
     fileprivate func loadBarButtons() {
@@ -74,7 +66,7 @@ class TasksViewController: UITableViewController, MCSwipeTableViewCellDelegate {
         present(alert, animated: true, completion: nil)
     }
 
-    fileprivate func fetch() {
+    @objc fileprivate func fetch() {
         SVProgressHUD.show(withStatus: "Fetching tasks...")
         let request = GetTasksRequest()
         Session.send(request) { result in
@@ -83,10 +75,10 @@ class TasksViewController: UITableViewController, MCSwipeTableViewCellDelegate {
                 SVProgressHUD.showSuccess(withStatus: "Success")
                 self.tasks = tasks
                 self.tableView.reloadData()
-                self.tableView.endRefreshing(at: .top)
+                self.tableView.refreshControl?.endRefreshing()
             case .failure(let error):
                 SVProgressHUD.showError(withStatus: "Error")
-                self.tableView.endRefreshing(at: .top)
+                self.tableView.refreshControl?.endRefreshing()
                 print(error)
             }
         }

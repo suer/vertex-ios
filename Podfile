@@ -1,4 +1,4 @@
-platform :ios, "9.0"
+platform :ios, "12.0"
 use_frameworks!
 inhibit_all_warnings!
 
@@ -9,7 +9,6 @@ target 'Vertex' do
   pod 'APIKit', '5.0.0'
   pod 'SVProgressHUD'
   pod 'MCSwipeTableViewCell'
-  pod 'PullToRefresher', '~> 3.1'
 end
 
 post_install do |installer|
