@@ -122,14 +122,20 @@ class TasksViewController: UITableViewController, MCSwipeTableViewCellDelegate {
     }
 
     func configureCell(_ cell: TaskCell, forRowAtIndexPath indexPath: IndexPath) {
+        resetConfigureCell(cell: cell)
+    }
+
+    func resetConfigureCell(cell: TaskCell) {
         cell.delegate = self
         if cell.task.done {
             let redColor = UIColor(red:232.0 / 255.0, green:61.0 / 255.0,blue: 14.0 / 255.0, alpha:1.0)
             cell.setSwipeGestureWith(self.viewWithImageName("times"), color: redColor, mode: .switch, state: .state1, completionBlock: nil)
+            cell.setSwipeGestureWith(self.viewWithImageName("times"), color: redColor, mode: .switch, state: .state3, completionBlock: nil)
             cell.backgroundColor = UIColor(white: 242.0 / 255.0, alpha: 1.0)
         } else {
             let greenColor = UIColor(red:85.0 / 255.0, green:213.0 / 255.0, blue:80.0 / 255.0, alpha:1.0)
             cell.setSwipeGestureWith(self.viewWithImageName("check"), color: greenColor, mode: .switch, state: .state1, completionBlock: nil)
+            cell.setSwipeGestureWith(self.viewWithImageName("check"), color: greenColor, mode: .switch, state: .state3, completionBlock: nil)
         }
     }
 
@@ -148,9 +154,10 @@ class TasksViewController: UITableViewController, MCSwipeTableViewCellDelegate {
     }
 
     func swipeTableViewCellDidEndSwiping(_ cell: MCSwipeTableViewCell!) {
-        if self.cellSwipePercentage >= cell.firstTrigger {
+        if abs(self.cellSwipePercentage) >= cell.firstTrigger {
             if let taskCell = cell as? TaskCell {
                 toggleTaskDone(taskCell)
+                resetConfigureCell(cell: taskCell)
             }
         }
     }
