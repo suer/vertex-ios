@@ -5,3 +5,4 @@ Pods/
 *.ipa
 *.app.dSYM.zip
 Vertex/preference.plist
+/.bundle
