@@ -9,7 +9,17 @@ platform :ios do
       profile_name: ENV['CODE_SIGN_PROFILE_NAME'],
       use_automatic_signing: false
     )
-    match(type: 'adhoc', readonly: true)
+    create_keychain(
+      name: ENV["MATCH_KEYCHAIN_NAME"],
+      password: ENV["MATCH_KEYCHAIN_PASSWORD"],
+      timeout: 1800
+    )
+    match(
+      type: 'adhoc',
+      keychain_name: ENV["MATCH_KEYCHAIN_NAME"],
+      keychain_password: ENV["MATCH_KEYCHAIN_PASSWORD"],
+      readonly: true
+    )
     gym(
       configuration: "Release",
       scheme: "Vertex",
