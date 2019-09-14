@@ -8,3 +8,4 @@ Vertex/preference.plist
 /.bundle
 fastlane/report.xml
 /build
+/.env
