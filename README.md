@@ -22,3 +22,19 @@ and edit it.
     $ pod install
 
 open Vertex.xcworkspace with XCode, and build.
+
+### Build ipa using Fastlane
+
+if you have not create certificates at Apple Developer Center,
+you can generate by fastlane match:
+
+```
+$ bundle exec fastlane match adhoc
+```
+
+then, build:
+
+```
+$ export CODE_SIGN_IDENTITY='xxxx' # like 'iPhone Distribution: Full Name (Team ID)'
+$ bundle exec fastlane beta
+```

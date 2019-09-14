@@ -6,3 +6,5 @@ Pods/
 *.app.dSYM.zip
 Vertex/preference.plist
 /.bundle
+fastlane/report.xml
+/build
