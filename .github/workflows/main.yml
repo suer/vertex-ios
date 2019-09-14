@@ -1,0 +1,26 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: macOS-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: prepare
+      run: |
+        bundle update --bundler
+        bundle install --path .bundle
+        bundle exec pod install
+    - name: build ipa
+      run: |
+        bundle exec fastlane beta
+      env:
+        FASTLANE_MATCH_GIT_URL: ${{secrets.FASTLANE_MATCH_GIT_URL}}
+        FASTLANE_MATCH_APP_IDENTIFIER: ${{secrets.FASTLANE_MATCH_APP_IDENTIFIER}}
+        FASTLANE_MATCH_USERNAME: ${{secrets.FASTLANE_MATCH_USERNAME}}
+        MATCH_PASSWORD: ${{secrets.FASTLANE_MATCH_PASSWORD}}
+        CODE_SIGN_IDENTITY: ${{secrets.CODE_SIGN_IDENTITY}}
+        CODE_SIGN_PROFILE_NAME: ${{secrets.CODE_SIGN_PROFILE_NAME}}
