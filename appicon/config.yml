@@ -1,0 +1,15 @@
+version: 2
+jobs:
+  build:
+    macos:
+      xcode: '10.2.1'
+
+    steps:
+      - checkout
+      - run:
+          name: Install CocoaPods
+          command: pod install
+
+      - run:
+          name: Build ipa
+          command: fastlane beta
