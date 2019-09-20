@@ -16,7 +16,7 @@ jobs:
         bundle exec pod install
     - name: generate preference.plist
       run: |
-        echo ${{secrets.PREFERENCE_PLIST}} > Vertex/preference.plist
+        echo "${{secrets.PREFERENCE_PLIST}}" > Vertex/preference.plist
     - name: build ipa
       run: |
         bundle exec fastlane beta
