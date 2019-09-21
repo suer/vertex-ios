@@ -20,7 +20,12 @@ or alternatively using `brew cask install fastlane`
 ```
 fastlane ios beta
 ```
-Description of what the lane does
+build ipa
+### ios publish_to_deploygate
+```
+fastlane ios publish_to_deploygate
+```
+publish to deploygate
 
 ----
 

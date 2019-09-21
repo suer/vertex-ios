@@ -1,7 +1,7 @@
 default_platform(:ios)
 
 platform :ios do
-  desc 'Description of what the lane does'
+  desc 'build ipa'
   lane :beta do
     automatic_code_signing(
       targets: "Vertex",
@@ -33,10 +33,20 @@ platform :ios do
       }
     )
     automatic_code_signing(
-      targets: "Vertex",
+      targets: 'Vertex',
       code_sign_identity: 'iPhone Developer',
       profile_name: '',
       use_automatic_signing: true
+    )
+  end
+
+  desc 'publish to deploygate'
+  lane :publish_to_deploygate do
+    beta
+    deploygate(
+      api_token: ENV['DEPLOYGATE_API_KEY'],
+      user: ENV['DEPLOYGATE_USER'],
+      message: "Build #{lane_context[SharedValues::BUILD_NUMBER]}"
     )
   end
 end
